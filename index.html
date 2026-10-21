@@ -110,6 +110,9 @@
         <a href="contact.html" class="btn btn-primary"><span class="dot"></span>Book a free 20-minute consultation</a>
         <a href="contact.html#fit" class="btn btn-secondary">Check your funding fit</a>
       </div>
+      <ul class="reassure">
+        <li>Free</li><li>20 minutes</li><li>No obligation</li>
+      </ul>
       <div class="stat-row">
         <div class="stat"><span class="num"><span class="count-up" data-target="300" data-prefix="~$" data-suffix="K">~$300K</span></span><span class="lbl">secured / supported</span></div>
         <div class="stat"><span class="num"><span class="count-up" data-target="15" data-suffix="+">15+</span></span><span class="lbl">years across academia, applied research, government and industry</span></div>
@@ -188,26 +191,41 @@
 </section>
 
 <!-- ============ PROGRAMS ============ -->
-<section class="section--tight" aria-labelledby="programs-title">
-  <div class="container">
-    <p class="eyebrow" id="programs-title">Programs &amp; funders worked with</p>
+<section class="programs" aria-labelledby="programs-title">
+  <div class="container programs-row">
+    <p class="programs-title" id="programs-title">Programs &amp; funders worked with</p>
+    <ul class="pill-list" style="list-style:none; padding:0; margin:0;">
+      <li class="tag-pill">ACOA</li>
+      <li class="tag-pill">NRC-IRAP</li>
+      <li class="tag-pill">NBIF</li>
+      <li class="tag-pill">Sustainable CAP</li>
+      <li class="tag-pill">NSERC</li>
+      <li class="tag-pill">Provincial Innovation Programs</li>
+      <li class="tag-pill">Student Employment Programs</li>
+    </ul>
   </div>
-  <div class="marquee">
-    <div class="marquee-track">
-      <span class="tag-pill">ACOA</span>
-      <span class="tag-pill">NRC-IRAP</span>
-      <span class="tag-pill">NBIF</span>
-      <span class="tag-pill">Sustainable CAP</span>
-      <span class="tag-pill">NSERC</span>
-      <span class="tag-pill">Provincial Innovation Programs</span>
-      <span class="tag-pill">Student Employment Programs</span>
-      <span class="tag-pill" aria-hidden="true">ACOA</span>
-      <span class="tag-pill" aria-hidden="true">NRC-IRAP</span>
-      <span class="tag-pill" aria-hidden="true">NBIF</span>
-      <span class="tag-pill" aria-hidden="true">Sustainable CAP</span>
-      <span class="tag-pill" aria-hidden="true">NSERC</span>
-      <span class="tag-pill" aria-hidden="true">Provincial Innovation Programs</span>
-      <span class="tag-pill" aria-hidden="true">Student Employment Programs</span>
+</section>
+
+<!-- ============ PAIN POINTS ============ -->
+<section class="section section--tight" aria-labelledby="pain-title">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow">Sound familiar?</p>
+      <h2 id="pain-title">You're doing the innovative work. Getting it funded is the hard part.</h2>
+    </div>
+    <div class="grid grid-3 gap-sm reveal-stagger">
+      <div class="pain reveal">
+        <p class="pain-q">&ldquo;I know there's funding out there — I just don't know which program fits.&rdquo;</p>
+        <p class="pain-a">Program matching and eligibility interpretation, before you invest time in an application.</p>
+      </div>
+      <div class="pain reveal">
+        <p class="pain-q">&ldquo;My team is busy building. Nobody has time to write a 30-page application.&rdquo;</p>
+        <p class="pain-a">Full application development, from technical interviews to a reviewer-ready submission.</p>
+      </div>
+      <div class="pain reveal">
+        <p class="pain-q">&ldquo;Our results are strong, but hard to explain to people outside the field.&rdquo;</p>
+        <p class="pain-a">Data analysis and technical writing that make your work clear and credible to funders.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -294,12 +312,16 @@
 <!-- ============ ABOUT TEASER ============ -->
 <section class="section section--navy blueprint" aria-labelledby="about-title">
   <div class="container split split--center">
-    <div class="panel-dark reveal">
-      <span class="tag">Track record</span>
-      <div class="stat-stack">
-        <div class="stat"><span class="num"><span class="count-up" data-target="300" data-prefix="~$" data-suffix="K">~$300K</span></span><span class="lbl">secured / supported</span></div>
-        <div class="stat"><span class="num"><span class="count-up" data-target="15" data-suffix="+">15+</span></span><span class="lbl">years across academia, applied research, government and industry</span></div>
-        <div class="stat"><span class="num">PhD</span><span class="lbl">Science</span></div>
+    <div class="about-visual reveal">
+      <figure class="portrait portrait--dark">
+        <img src="assets/img/leandro-headshot.jpg" alt="Leandro Passarini" width="800" height="1335" loading="lazy">
+      </figure>
+      <div class="panel-dark">
+        <div class="stat-inline">
+          <div class="stat"><span class="num"><span class="count-up" data-target="300" data-prefix="~$" data-suffix="K">~$300K</span></span><span class="lbl">secured / supported</span></div>
+          <div class="stat"><span class="num"><span class="count-up" data-target="15" data-suffix="+">15+</span></span><span class="lbl">years of experience</span></div>
+          <div class="stat"><span class="num">PhD</span><span class="lbl">Science</span></div>
+        </div>
       </div>
     </div>
     <div class="reveal">
@@ -324,6 +346,10 @@
     </div>
 
     <div class="faq reveal">
+      <details>
+        <summary>What do I need to prepare for the first call?</summary>
+        <p>Nothing formal. A short description of your project, a rough budget, and your timeline are enough to start. We'll work out the rest together.</p>
+      </details>
       <details>
         <summary>Is my business or project eligible?</summary>
         <p>That's exactly what the free 20-minute consultation and follow-up eligibility assessment are for — we'll review your project against real program criteria before you commit to anything.</p>
@@ -353,10 +379,17 @@
       <a href="contact.html" class="btn btn-light"><span class="dot"></span>Book a free 20-minute consultation</a>
       <a href="contact.html#fit" class="btn btn-ghost-light">Check your funding fit</a>
     </div>
+    <ul class="reassure reassure--light">
+      <li>Free</li><li>20 minutes</li><li>No obligation</li>
+    </ul>
   </div>
 </section>
 
 </main>
+
+<div class="mobile-cta">
+  <a href="contact.html" class="btn btn-primary btn-block"><span class="dot"></span>Book a free 20-minute consultation</a>
+</div>
 
 <footer class="site-footer">
   <div class="container footer-grid">

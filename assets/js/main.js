@@ -31,6 +31,19 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Sticky mobile booking bar: show once the hero is gone, hide when another CTA or the footer is on screen
+  const mobileCta = document.querySelector('.mobile-cta');
+  const firstSection = document.querySelector('main > section');
+  if (mobileCta && firstSection && 'IntersectionObserver' in window) {
+    const visible = new Set();
+    const update = () => mobileCta.classList.toggle('is-visible', visible.size === 0);
+    const ctaIo = new IntersectionObserver((entries) => {
+      entries.forEach(e => e.isIntersecting ? visible.add(e.target) : visible.delete(e.target));
+      update();
+    });
+    [firstSection, ...document.querySelectorAll('.section--blue, .site-footer')].forEach(el => ctaIo.observe(el));
+  }
+
   // Stagger index for grouped reveals
   document.querySelectorAll('.reveal-stagger').forEach(group => {
     Array.from(group.children).forEach((child, i) => child.style.setProperty('--i', i));
