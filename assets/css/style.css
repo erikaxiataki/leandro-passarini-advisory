@@ -823,9 +823,11 @@ p{ line-height: 1.7; color: var(--ink-soft); margin: 0; text-wrap: pretty; }
 .about-visual{ display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; max-width: 420px; }
 .portrait--dark{ box-shadow: 0 30px 60px -30px rgba(0,0,0,0.6); aspect-ratio: 1 / 1; max-width: none; }
 .portrait--dark::after{ background: var(--orange); }
-.stat-inline{ display: grid; grid-template-columns: repeat(3, auto); justify-content: space-between; gap: 20px; }
-.stat-inline .stat .num{ font-size: clamp(1.3rem, 1.8vw, 1.5rem); white-space: nowrap; }
-.stat-inline .stat .lbl{ font-size: .78rem; }
+.stat-inline{ display: grid; gap: 14px; }
+.stat-inline .stat{ display: grid; grid-template-columns: 6.6rem 1fr; gap: 12px; align-items: baseline; }
+.stat-inline .stat + .stat{ padding-top: 14px; border-top: 1px solid var(--line-dark); }
+.stat-inline .stat .num{ font-size: 1.5rem; white-space: nowrap; }
+.stat-inline .stat .lbl{ font-size: .84rem; margin-top: 0; max-width: none; }
 .about-visual .panel-dark{ padding: 22px 22px; }
 
 .next-steps{ list-style: none; padding: 0; margin: 8px 0 0; display: grid; gap: 16px; counter-reset: ns; }
