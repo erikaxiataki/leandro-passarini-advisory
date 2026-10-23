@@ -1,14 +1,53 @@
-// Nav toggle
 document.addEventListener('DOMContentLoaded', () => {
+  // Header shadow on scroll
+  const header = document.querySelector('.site-header');
+  if (header) {
+    const onScroll = () => header.classList.toggle('is-scrolled', window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+
+  // Mobile nav
   const toggle = document.querySelector('.nav-toggle');
-  if (toggle) {
+  const panel = document.getElementById('mobile-panel');
+  if (toggle && panel) {
+    const setOpen = (open) => {
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      panel.classList.toggle('is-open', open);
+    };
     toggle.addEventListener('click', () => {
-      document.body.classList.toggle('nav-open');
+      setOpen(toggle.getAttribute('aria-expanded') !== 'true');
     });
-    document.querySelectorAll('.mobile-panel a').forEach(a => {
-      a.addEventListener('click', () => document.body.classList.remove('nav-open'));
+    panel.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setOpen(false)));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+        setOpen(false);
+        toggle.focus();
+      }
+    });
+    window.matchMedia('(min-width: 881px)').addEventListener('change', (e) => {
+      if (e.matches) setOpen(false);
     });
   }
+
+  // Sticky mobile booking bar: show once the hero is gone, hide when another CTA or the footer is on screen
+  const mobileCta = document.querySelector('.mobile-cta');
+  const firstSection = document.querySelector('main > section');
+  if (mobileCta && firstSection && 'IntersectionObserver' in window) {
+    const visible = new Set();
+    const update = () => mobileCta.classList.toggle('is-visible', visible.size === 0);
+    const ctaIo = new IntersectionObserver((entries) => {
+      entries.forEach(e => e.isIntersecting ? visible.add(e.target) : visible.delete(e.target));
+      update();
+    });
+    [firstSection, ...document.querySelectorAll('.section--blue, .site-footer')].forEach(el => ctaIo.observe(el));
+  }
+
+  // Stagger index for grouped reveals
+  document.querySelectorAll('.reveal-stagger').forEach(group => {
+    Array.from(group.children).forEach((child, i) => child.style.setProperty('--i', i));
+  });
 
   // Scroll reveal
   const revealEls = document.querySelectorAll('.reveal');
@@ -20,27 +59,21 @@ document.addEventListener('DOMContentLoaded', () => {
           io.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.14, rootMargin: '0px 0px -40px 0px' });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
     revealEls.forEach(el => io.observe(el));
   } else {
     revealEls.forEach(el => el.classList.add('in'));
   }
 
-  // stagger index for children
-  document.querySelectorAll('.reveal-stagger').forEach(group => {
-    Array.from(group.children).forEach((child, i) => {
-      child.style.setProperty('--i', i);
-    });
-  });
-
-  // Count-up numbers
+  // Count-up numbers (final value is already in the HTML for no-JS and search engines)
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   function animateCount(el) {
-    if (el.dataset.counted) return;
+    if (el.dataset.counted || reduceMotion) return;
     el.dataset.counted = 'true';
     const target = parseFloat(el.dataset.target || '0');
     const prefix = el.dataset.prefix || '';
     const suffix = el.dataset.suffix || '';
-    const duration = 1500;
+    const duration = 1400;
     const startTime = performance.now();
     function tick(now) {
       const p = Math.min((now - startTime) / duration, 1);
@@ -51,21 +84,8 @@ document.addEventListener('DOMContentLoaded', () => {
     requestAnimationFrame(tick);
   }
 
-  document.querySelectorAll('.count-up.eager').forEach(animateCount);
-
-  // Flip cards
-  document.querySelectorAll('.flip-card').forEach(card => {
-    card.addEventListener('click', () => card.classList.toggle('flipped'));
-    card.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        card.classList.toggle('flipped');
-      }
-    });
-  });
-
-  const lazyCounts = document.querySelectorAll('.count-up:not(.eager)');
-  if ('IntersectionObserver' in window && lazyCounts.length) {
+  const counts = document.querySelectorAll('.count-up');
+  if ('IntersectionObserver' in window && counts.length) {
     const countIo = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -74,8 +94,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
     }, { threshold: 0.4 });
-    lazyCounts.forEach(el => countIo.observe(el));
-  } else {
-    lazyCounts.forEach(animateCount);
+    counts.forEach(el => countIo.observe(el));
   }
 });
